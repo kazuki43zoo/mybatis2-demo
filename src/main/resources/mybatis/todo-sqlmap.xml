@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap
+		PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+		"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.example.dao.TodoDao">
+
+	<insert id="insert" parameterClass="com.example.domain.Todo">
+
+		<selectKey keyProperty="id" resultClass="int" type="pre">
+			SELECT seq_todo.nextval
+		</selectKey>
+
+		INSERT INTO todo
+		(
+			id
+			,title
+			,details
+			,finished
+		)
+		values(
+			#id#
+			,#title#
+			,#details#
+			,#finished#
+		)
+	</insert>
+	<select id="select" parameterClass="int" resultClass="com.example.domain.Todo">
+		SELECT
+			id, title, details, finished
+		FROM
+			todo
+		WHERE
+			id = #id#
+	</select>
+
+</sqlMap>
